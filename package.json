@@ -1,7 +1,7 @@
 {
   "name": "@tater-archives/react-use-debounce",
   "version": "1.0.0",
-  "description": "React hook to statefully set an interval",
+  "description": "React hooks to debounce functions",
   "type": "module",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
