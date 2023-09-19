@@ -16,10 +16,7 @@ import { Dispatch, SetStateAction, useCallback, useEffect, useRef, useState } fr
 function useUnsafeDebounce<P extends unknown[]>(func: (...args: P) => void, delay: number): (...args: P) => void {
     const timeoutRef = useRef<number>();
 
-    const argsRef = useRef<P>();
-
     return useCallback((...args: P) => {
-        argsRef.current = args;
         clearTimeout(timeoutRef.current);
         timeoutRef.current = setTimeout(() => func(...args), delay);
     }, [delay, func]);

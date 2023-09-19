@@ -18,7 +18,7 @@
   "keywords": [
     "react",
     "hooks",
-    "interval",
+    "debounce",
     "utility"
   ],
   "author": "Josiah Fu josiahfu@gmail.com",
