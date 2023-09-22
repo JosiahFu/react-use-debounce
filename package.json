@@ -1,6 +1,6 @@
 {
   "name": "@tater-archives/react-use-debounce",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "React hooks to debounce functions",
   "type": "module",
   "main": "dist/cjs/index.js",
