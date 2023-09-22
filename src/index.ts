@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 /**
  * Creates a debounced version of a function where the original function is
@@ -62,7 +62,7 @@ function useDebounce<P extends unknown[]>(func: (...args: P) => void, delay: num
  * @param delay The delay before the parent state setter should be called
  * @returns A state pair for the child state
  */
-function useDebouncedState<S>(state: S, setState: Dispatch<SetStateAction<S>>, delay: number): [S, Dispatch<SetStateAction<S>>] {
+function useDebouncedState<S>(state: S, setState: (state: S) => void, delay: number): [S, (value: S) => void] {
     const [internalState, setInternalState] = useState(state);
 
     const internalStateRef = useRef(internalState);
@@ -70,7 +70,7 @@ function useDebouncedState<S>(state: S, setState: Dispatch<SetStateAction<S>>, d
 
     const debouncedSetState = useDebounce(setState, delay);
 
-    const handleSetState = useCallback((value: SetStateAction<S>) => {
+    const handleSetState = useCallback((value: S) => {
         setInternalState(value);
         debouncedSetState(value);
     }, [debouncedSetState]);
