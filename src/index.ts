@@ -71,7 +71,7 @@ function useDebouncedState<S>(state: S, setState: (state: S) => void, delay: num
     const internalStateRef = useRef(internalState);
     internalStateRef.current = internalState;
 
-    const debouncedSetState = useDebounce(setState, delay);
+    const debouncedSetState = useUnsafeDebounce(setState, delay);
 
     const handleSetState = useCallback((value: S) => {
         setInternalState(value);
