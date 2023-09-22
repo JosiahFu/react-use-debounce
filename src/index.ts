@@ -40,11 +40,14 @@ function useDebounce<P extends unknown[]>(func: (...args: P) => void, delay: num
 
     const argsRef = useRef<P>();
 
+    const funcRef = useRef<(...args: P) => void>();
+    funcRef.current = func;
+
     useEffect(() => (
         () => {
-            argsRef.current !== undefined && func(...argsRef.current)
+            argsRef.current !== undefined && funcRef.current?.(...argsRef.current);
         }
-    ), [func]);
+    ), []);
 
     return useCallback((...args: P) => {
         argsRef.current = args;
