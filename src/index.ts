@@ -16,6 +16,12 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 function useUnsafeDebounce<P extends unknown[]>(func: (...args: P) => void, delay: number): (...args: P) => void {
     const timeoutRef = useRef<number>();
 
+    // Clear timeout on unmount
+    useEffect(() => (
+        () =>
+            clearTimeout(timeoutRef.current)
+    ), [])
+
     return useCallback((...args: P) => {
         clearTimeout(timeoutRef.current);
         timeoutRef.current = setTimeout(() => func(...args), delay);
@@ -45,6 +51,7 @@ function useDebounce<P extends unknown[]>(func: (...args: P) => void, delay: num
 
     useEffect(() => (
         () => {
+            clearTimeout(timeoutRef.current);
             argsRef.current !== undefined && funcRef.current?.(...argsRef.current);
         }
     ), []);
