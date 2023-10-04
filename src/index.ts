@@ -59,8 +59,8 @@ function useDebounce<P extends unknown[]>(func: (...args: P) => void, delay: num
     return useCallback((...args: P) => {
         argsRef.current = args;
         clearTimeout(timeoutRef.current);
-        timeoutRef.current = setTimeout(() => func(...args), delay);
-    }, [delay, func])
+        timeoutRef.current = setTimeout(() => funcRef.current(...args), delay);
+    }, [delay])
 }
 
 /**
